@@ -7,7 +7,9 @@ public interface UserService {
 
 	Collection<User> findAll();
 	User findOne(Long id);
-	User create(User greeting);
-	User update(User greeting);
+	User create(User user);
+	User update(User user);
+	boolean isUserExists(String username, String password);
+	boolean isUsernameTaken(String username);
 	void delete(Long id);
 }
