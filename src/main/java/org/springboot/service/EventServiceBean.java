@@ -3,7 +3,11 @@ package org.springboot.service;
 import java.util.Collection;
 
 import javax.persistence.EntityExistsException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,4 +92,11 @@ public class EventServiceBean implements EventService{
 
 	     logger.info("< delete id:{}", id);
 	}
+
+	@Override
+	public Event findById(Long id) {
+		Event e = eventRepository.findById(id);
+		return e;
+	}
+
 }

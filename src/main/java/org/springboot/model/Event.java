@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -29,16 +32,21 @@ public class Event {
 	@Column(name = "event_date")
 	private Date date;
 	
-	@OneToMany(targetEntity = Gift.class)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	 private User user;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "event", cascade = CascadeType.ALL)
 	private List<Gift> wantedGifts;
 	
 	protected Event(){}
 	
-	public Event(String name, String description, Date date) {
+	public Event(String name, String description, Date date, User user) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.date = date;
+		this.user = user;
 		wantedGifts = new ArrayList<Gift>();
 	}
 	
