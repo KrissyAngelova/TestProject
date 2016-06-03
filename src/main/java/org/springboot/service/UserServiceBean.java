@@ -97,14 +97,7 @@ public class UserServiceBean implements UserService{
 
 	@Override
 	public boolean isUserExists(String username, String password) {
-//		Collection<User> users = findAll();
-//		
-//		for(User u : users){
-//			if(u.getUsername().equals(username) && u.getPassword().equals(password)){
-//				return true;
-//				
-//			}
-//		}
+	
 		User u = userRepository.findByUsername(username);
 		if(u != null && u.getPassword().equals(password)){
 			return true;
@@ -119,6 +112,12 @@ public class UserServiceBean implements UserService{
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public User findByUsername(String username) {
+		User u = userRepository.findByUsername(username);
+		return u;
 	}
 
 	

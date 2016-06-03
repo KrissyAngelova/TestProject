@@ -9,7 +9,8 @@ public interface UserService {
 	User findOne(Long id);
 	User create(User user);
 	User update(User user);
+	void delete(Long id);
+	User findByUsername(String username);
 	boolean isUserExists(String username, String password);
 	boolean isUsernameTaken(String username);
-	void delete(Long id);
 }
