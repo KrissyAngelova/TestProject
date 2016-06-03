@@ -38,8 +38,9 @@ public class UserServiceBean implements UserService{
 		User user = userRepository.findOne(id);
 		return user;
 	}
-
-	@Override
+	
+	
+	 @Override
 	 @Transactional(
 	            propagation = Propagation.REQUIRED,
 	            readOnly = false)
@@ -59,6 +60,9 @@ public class UserServiceBean implements UserService{
 	}
 
 	@Override
+	@Transactional(
+            propagation = Propagation.REQUIRED,
+            readOnly = false)
 	public User update(User user) {
 		logger.info("> update id:{}", user.getId());
 
@@ -79,6 +83,9 @@ public class UserServiceBean implements UserService{
 	}
 
 	@Override
+	@Transactional(
+            propagation = Propagation.REQUIRED,
+            readOnly = false)
 	public void delete(Long id) {
 		 logger.info("> delete id:{}", id);
 
@@ -90,30 +97,29 @@ public class UserServiceBean implements UserService{
 
 	@Override
 	public boolean isUserExists(String username, String password) {
-		Collection<User> users = findAll();
-		
-		for(User u : users){
-			if(u.getUsername().equals(username) && u.getPassword().equals(password)){
-				return true;
-				
-			}
+//		Collection<User> users = findAll();
+//		
+//		for(User u : users){
+//			if(u.getUsername().equals(username) && u.getPassword().equals(password)){
+//				return true;
+//				
+//			}
+//		}
+		User u = userRepository.findByUsername(username);
+		if(u != null && u.getPassword().equals(password)){
+			return true;
 		}
 		return false;
 	}
 
 	@Override
 	public boolean isUsernameTaken(String username) {
-		Collection<User> users = findAll();
-		
-		for(User u : users){
-			if(u.getUsername().equals(username)){
-				return true;
-				
-			}
+		User u = userRepository.findByUsername(username);
+		if(u != null){
+			return true;
 		}
 		return false;
 	}
-	
-	
 
+	
 }
