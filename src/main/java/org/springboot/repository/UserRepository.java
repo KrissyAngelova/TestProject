@@ -1,5 +1,6 @@
 package org.springboot.repository;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springboot.model.User;
@@ -13,4 +14,5 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Long> {
 	
 	User findByUsername(String username);
+	Collection<User> findByUsernameContaining(String name);
 }

@@ -50,6 +50,14 @@ public class Event {
 		wantedGifts = new ArrayList<Gift>();
 	}
 	
+	public Event(String name, String description, Date date) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.date = date;
+	
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -80,5 +88,7 @@ public class Event {
 	public void setId(Long id){
 		this.id = id;
 	}
-	
+	public User getUser(){
+		return this.user;
+	}
 }

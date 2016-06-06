@@ -13,6 +13,18 @@
 	<input type="submit" value="Logout" />
 	</form>
 	<p>Welcome, ${username}</p>
+
+	<form method="post" action="/Search">
+	<h2> Search </h2>
+	<input type="text" name="name" value="" required/>
+	<select name = "choice">
+  	<option value="user">User</option>
+  	<option value="event">Event</option>
+	</select>
+	<input type="submit" value="Search" />
+	</form>
+	
+	</p>
 	
 	<c:if test = "${empty myEvents}">
 			<p>No Events to show</p>
@@ -21,7 +33,7 @@
 	<c:if test = "${not empty myEvents}">
 	<table  border="1" width="30%" cellpadding="3">
 	<tr>	
-		<td colspan = "3">MY EVENTS</td>
+		<td colspan = "6">MY EVENTS</td>
 	</tr>
 	<tr>
 		<td>N</td>
@@ -36,6 +48,11 @@
 	    		<td>
 	    				<form method="get" action="/openEvent/${event.id}">
 						<input type="submit" value="Info" />
+						</form>
+				</td>
+				<td>
+	    				<form method="GET" action="/openUpdateEventPage/${event.id}">
+						<input type="submit" value="update" />
 						</form>
 				</td>
 				<td>

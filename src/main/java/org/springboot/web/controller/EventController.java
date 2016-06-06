@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springboot.model.User;
 import org.springboot.service.EventService;
 import org.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,12 +42,14 @@ public class EventController {
 		Event e = new Event(name, description, date ,u);
 		Event newEvent = eventService.create(e);
 		if(newEvent != null){
-			request.getSession().setAttribute("message", "Event was created successfully!");
+			request.getSession().setAttribute("createEventMessage", "Event was created successfully!");
+			
 		}
 		else{
-			request.getSession().setAttribute("message","Oops! Couldn't make an event!Please try again!" );
+			request.getSession().setAttribute("createEventMessage","Oops! Couldn't make an event!Please try again!" );
 		}
 		response.sendRedirect("/createEvent");
+		
 	}
 	
 	@RequestMapping(
@@ -53,8 +57,9 @@ public class EventController {
 			method = RequestMethod.GET
 			)
 	public void openEvent(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws IOException{
-		Event e = eventService.findById(id);
+		Event e = eventService.findOne(id);
 		request.getSession().setAttribute("event", e);
+		request.getSession().setAttribute("wantedGifts", e.getWantedGifts());
 		response.sendRedirect("/eventInfoPage");
 	}
 	
@@ -66,5 +71,53 @@ public class EventController {
 		eventService.delete(id);
 		
 		response.sendRedirect("/loggedUserPage");
+	}
+	
+	@RequestMapping(
+			value = "/UpdateEvent/{id}",
+			method = RequestMethod.POST
+			)
+	public void updateEvent(@PathVariable("id") Long id,Model model, HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException{
+		String name =  request.getParameter("name");
+		String description =  request.getParameter("description");
+		String str = request.getParameter("date");
+		Event event = eventService.findOne(id);
+		event.setName(name);
+		event.setDescription(description);
+		if(!str.equals("")){
+			DateFormat formatter = new SimpleDateFormat("yy-MM-dd");
+			Date date = formatter.parse(str);
+			event.setDate(date);
+		}
+		
+		Event updatedEvent = eventService.update(event);
+		if(updatedEvent != null){
+			request.getSession().setAttribute("updateEventMessage", "Event was updated successfully!");
+		}
+		else{
+			request.getSession().setAttribute("updateEventMessage","Oops! Couldn't update an event!Please try again!" );
+		}
+		response.sendRedirect("/openUpdateEventPage/"+updatedEvent.getId());
+	}
+	
+	@RequestMapping(
+			value = "/openUpdateEventPage/{id}",
+			method = RequestMethod.GET
+			)
+	public void openUpdateEvent(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		Event event = eventService.findOne(id);
+		request.getSession().setAttribute("event", event);
+		response.sendRedirect("/updateEvent");
+	}
+	
+	@RequestMapping(
+			value = "/EventSearch",
+			method = RequestMethod.GET
+			)
+	public void userSearch(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String eventName = (String) request.getSession().getAttribute("searchedName");
+		Collection<Event> events = eventService.findByNameContaining(eventName);
+		request.getSession().setAttribute("events", events);
+		response.sendRedirect("/searchedEvents");
 	}
 }

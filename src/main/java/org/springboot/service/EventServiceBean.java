@@ -94,9 +94,15 @@ public class EventServiceBean implements EventService{
 	}
 
 	@Override
-	public Event findById(Long id) {
-		Event e = eventRepository.findById(id);
-		return e;
+	public Collection<Event> findByName(String name) {
+		Collection<Event> events = eventRepository.findByName(name);
+		return events;
+	}
+
+	@Override
+	public Collection<Event> findByNameContaining(String name) {
+		Collection<Event> events = eventRepository.findByName(name);
+		return events;
 	}
 
 }

@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Create event</title>
+<title>Insert title here</title>
 </head>
- <body>
+<body>
  <form method="post" action="/Logout">
 	<input type="submit" value="Logout" />
 	</form>
-        <form method="post" action="/CreateEvent">
+        <form method="post" action="/AddGift">
             <center>
             <table border="1" width="30%" cellpadding="5">
                 <thead>
@@ -22,16 +22,12 @@
                 <tbody>
                    
                     <tr>
-                        <td>Event name</td>
+                        <td>Gift name</td>
                         <td><input type="text" name="name" value="" required/></td>
                     </tr>
                     <tr>
                         <td>Description</td>
                         <td><input type="text" name="description" value="" required/></td>
-                    </tr>
-                     <tr>
-                        <td>Date</td>
-                        <td><input type="date" name="date" value="" required/></td>
                     </tr>
                     <tr>
                         <td><input type="submit" value="Submit" /></td>
@@ -41,10 +37,10 @@
             </table>
             </center>
         </form>
-        <p>${createEventMessage}</p>
-        <c:set var="createEventMessage" value="" scope="session"  />
-         <form method="get" action="/loggedUserPage">
+        <p>${addGiftMessage}</p>
+        <c:set var="addGiftMessage" value="" scope="session"  />
+         <form method="get" action="/openEvent/${event.id}">
 		<input type="submit" value="Back" />
 		</form>
-    </body>
+</body>
 </html>

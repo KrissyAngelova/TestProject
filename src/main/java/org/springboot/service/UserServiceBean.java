@@ -120,5 +120,11 @@ public class UserServiceBean implements UserService{
 		return u;
 	}
 
+	@Override
+	public Collection<User> findByUsernameContaining(String name) {
+		Collection<User> users = userRepository.findByUsernameContaining(name);
+		return users;
+	}
+
 	
 }

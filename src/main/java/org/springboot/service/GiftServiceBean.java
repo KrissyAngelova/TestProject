@@ -36,7 +36,7 @@ public class GiftServiceBean implements GiftService {
 	@Override
 	public Gift findOne(Long id) {
 		Gift gift = giftRepository.findOne(id);
-		return null;
+		return gift;
 	}
 
 	@Override

@@ -72,7 +72,7 @@ public class UserController {
 			response.sendRedirect("/loggedUserPage");
 		}
 		else{
-			request.getSession().setAttribute("message", "Wrong username or password");
+			request.getSession().setAttribute("loginErrorMessage", "Wrong username or password");
 			response.sendRedirect("/");
 		}
 	}
@@ -88,18 +88,18 @@ public class UserController {
 		
 		
 		if(exists){
-			request.getSession().setAttribute("message", "User already exists");
+			request.getSession().setAttribute("regMessage", "User already exists");
 			
 		}
 		else{
 			if(!userService.isUsernameTaken(username)){
 				User u = new User(username, password);
 				userService.create(u);
-				request.getSession().setAttribute("message", "Registration created successfully");
+				request.getSession().setAttribute("regMessage", "Registration created successfully");
 				
 			}
 			else{
-				request.getSession().setAttribute("message", "Username is taken");
+				request.getSession().setAttribute("regMessage", "Username is taken");
 				
 			}
 			
@@ -107,5 +107,32 @@ public class UserController {
 		response.sendRedirect("/reg");
 	}
 	
+	@RequestMapping(
+			value = "/UserSearch",
+			method = RequestMethod.GET
+			)
+	public void userSearch(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String username = (String) request.getSession().getAttribute("searchedName");
+		Collection<User> users = userService.findByUsernameContaining(username);
+		request.getSession().setAttribute("users", users);
+		response.sendRedirect("/searchedUsers");
+	}
 	
+	@RequestMapping(
+			value = "/viewProfile/{id}",
+			method = RequestMethod.GET
+			)
+	public void viewProfile(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		User currentUser = (User) request.getSession().getAttribute("user");
+	
+		if(currentUser.getId() == id){
+			response.sendRedirect("/loggedUserPage");
+		}
+		else{
+			User u = userService.findOne(id);
+			request.getSession().setAttribute("userProfile", u);
+			request.getSession().setAttribute("userEvents", u.getMyEvents());
+			response.sendRedirect("/profile");
+		}
+	}
 }

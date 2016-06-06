@@ -36,12 +36,21 @@ public class Gift {
 	
 	protected Gift(){}
 	
-	public Gift(String name, String description, boolean isTaken, User buyer) {
+	public Gift(String name, String description,Event event, boolean isTaken, User buyer) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.isTaken = isTaken;
 		this.buyer = buyer;
+	}
+	
+	public Gift(String name, String description, Event event) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.event = event;
+		this.isTaken = false;
+		this.buyer = null;
 	}
 	
 	public String getName() {

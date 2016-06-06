@@ -10,7 +10,9 @@ public interface UserService {
 	User create(User user);
 	User update(User user);
 	void delete(Long id);
+	Collection<User> findByUsernameContaining(String name);
 	User findByUsername(String username);
 	boolean isUserExists(String username, String password);
 	boolean isUsernameTaken(String username);
+	
 }
