@@ -7,8 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; UTF-8">
 <title>loggedUserPage</title>
+<link rel="stylesheet" href="/resources/static/css/mainStyleCss.css">
 </head>
-<body>
+<body class="align">
     <form method="post" action="/Logout">
 	<input type="submit" value="Logout" />
 	</form>
