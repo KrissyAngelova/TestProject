@@ -9,6 +9,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form method="post" action="/Logout">
+	<input type="submit" value="Logout" />
+	</form>
 <c:if test = "${empty users}">
 			<p>No Users to show</p>
 	</c:if>
@@ -35,5 +38,8 @@
 		</c:forEach>
 	</table>
 	</c:if>
+	<form method="get" action="/loggedUserPage">
+		<input type="submit" value="Back" />
+		</form>
 </body>
 </html>

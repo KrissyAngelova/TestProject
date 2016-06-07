@@ -9,6 +9,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form method="post" action="/Logout">
+	<input type="submit" value="Logout" />
+	</form>
 <c:if test = "${empty events}">
 			<p>No Events to show</p>
 	</c:if>
@@ -22,6 +25,7 @@
 		<td>N</td>
 		<td>Name</td>
 		<td>Date</td>
+		<td>User</td>
 		
 	</tr>
 		<c:forEach items="${events}" var="event" varStatus="myIndex">
@@ -29,9 +33,18 @@
 				<td> ${myIndex.index+1}</td>
 	    		<td> ${event.name}</td>
 	    		<td><fmt:formatDate pattern="dd-MM-YYYY" value="${event.date}"/></td>
+	    		<td>${event.user.getUsername()}</td>
+	    		<td>
+	    				<form method="get" action="/openOtherEvent2/${event.id}">
+						<input type="submit" value="Info" />
+						</form>
+				</td>
 	    	</tr>
 		</c:forEach>
 	</table>
 	</c:if>
+	<form method="get" action="/loggedUserPage">
+		<input type="submit" value="Back" />
+		</form>
 </body>
 </html>

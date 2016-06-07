@@ -32,11 +32,11 @@ public class Event {
 	@Column(name = "event_date")
 	private Date date;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	 private User user;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "event", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "event", cascade = CascadeType.ALL)
 	private List<Gift> wantedGifts;
 	
 	protected Event(){}

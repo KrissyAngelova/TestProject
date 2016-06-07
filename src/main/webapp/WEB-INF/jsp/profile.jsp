@@ -35,12 +35,16 @@
 	    		<td> ${event.name}</td>
 	    		<td> ${event.description}</td>
 	    		<td>
-	    				<form method="get" action="/openEvent/${event.id}">
+	    				<form method="get" action="/openOtherEvent/${event.id}">
 						<input type="submit" value="Info" />
 						</form>
+				</td>
 	    	</tr>
 		</c:forEach>
 	</table>
 	</c:if>
+	<form method="get" action="/searchedUsers">
+		<input type="submit" value="Back" />
+		</form>
 </body>
 </html>

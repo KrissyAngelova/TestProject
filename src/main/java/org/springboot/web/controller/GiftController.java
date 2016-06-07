@@ -99,4 +99,66 @@ public class GiftController {
 			response.sendRedirect("/openEvent/"+e.getId());
 		}
 	}
+	
+	@RequestMapping(
+			value = "/takeGift/{id}",
+			method = RequestMethod.POST
+			)
+	public void takeGift(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		Gift gift = giftService.findOne(id);
+		User user = (User) request.getSession().getAttribute("user");
+		gift.setBuyer(user);
+		gift.setTaken(true);
+		Gift updatedGift = giftService.update(gift);
+		if(updatedGift==null){
+			request.getSession().setAttribute("takeErrorMessage", "Something went wrong");
+		}
+		response.sendRedirect("/otherEventInfoPage");
+	}
+	
+	@RequestMapping(
+			value = "/removeGift/{id}",
+			method = RequestMethod.POST
+			)
+	public void removeGift(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		Gift gift = giftService.findOne(id);
+		gift.setBuyer(null);
+		gift.setTaken(false);
+		Gift updatedGift = giftService.update(gift);
+		if(updatedGift==null){
+			request.getSession().setAttribute("takeErrorMessage", "Something went wrong");
+		}
+		response.sendRedirect("/otherEventInfoPage");
+	}
+	
+	@RequestMapping(
+			value = "/takeGift2/{id}",
+			method = RequestMethod.POST
+			)
+	public void takeGift2(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		Gift gift = giftService.findOne(id);
+		User user = (User) request.getSession().getAttribute("user");
+		gift.setBuyer(user);
+		gift.setTaken(true);
+		Gift updatedGift = giftService.update(gift);
+		if(updatedGift==null){
+			request.getSession().setAttribute("takeErrorMessage", "Something went wrong");
+		}
+		response.sendRedirect("/otherEventInfoPage2");
+	}
+	
+	@RequestMapping(
+			value = "/removeGift2/{id}",
+			method = RequestMethod.POST
+			)
+	public void removeGift2(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		Gift gift = giftService.findOne(id);
+		gift.setBuyer(null);
+		gift.setTaken(false);
+		Gift updatedGift = giftService.update(gift);
+		if(updatedGift==null){
+			request.getSession().setAttribute("takeErrorMessage", "Something went wrong");
+		}
+		response.sendRedirect("/otherEventInfoPage2");
+	}
 }

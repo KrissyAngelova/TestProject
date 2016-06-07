@@ -89,6 +89,34 @@ public class BaseController {
 	}
 	
 	@RequestMapping(
+            value = "/otherEventInfoPage",
+            method = RequestMethod.GET
+            )
+	public ModelAndView otherEventInfoPage(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("otherEventInfoPage");
+		Event e = (Event) request.getSession().getAttribute("event");
+		Event updatedEvent = eventService.findOne(e.getId());
+		request.getSession().setAttribute("event", updatedEvent);
+		request.getSession().setAttribute("wantedGifts", updatedEvent.getWantedGifts());
+		return mav;
+	}
+	
+	@RequestMapping(
+            value = "/otherEventInfoPage2",
+            method = RequestMethod.GET
+            )
+	public ModelAndView otherEventInfoPage2(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("otherEventInfoPage2");
+		Event e = (Event) request.getSession().getAttribute("event");
+		Event updatedEvent = eventService.findOne(e.getId());
+		request.getSession().setAttribute("event", updatedEvent);
+		request.getSession().setAttribute("wantedGifts", updatedEvent.getWantedGifts());
+		return mav;
+	}
+	
+	@RequestMapping(
             value = "/Logout",
             method = RequestMethod.POST
             )

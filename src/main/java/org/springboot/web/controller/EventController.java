@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -64,6 +65,28 @@ public class EventController {
 	}
 	
 	@RequestMapping(
+			value = "/openOtherEvent/{id}",
+			method = RequestMethod.GET
+			)
+	public void openOtherEvent(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		Event e = eventService.findOne(id);
+		request.getSession().setAttribute("event", e);
+		request.getSession().setAttribute("wantedGifts", e.getWantedGifts());
+		response.sendRedirect("/otherEventInfoPage");
+	}
+	
+	@RequestMapping(
+			value = "/openOtherEvent2/{id}",
+			method = RequestMethod.GET
+			)
+	public void openOtherEvent2(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		Event e = eventService.findOne(id);
+		request.getSession().setAttribute("event", e);
+		request.getSession().setAttribute("wantedGifts", e.getWantedGifts());
+		response.sendRedirect("/otherEventInfoPage2");
+	}
+	
+	@RequestMapping(
 			value = "/deleteEvent/{id}",
 			method = RequestMethod.POST
 			)
@@ -117,7 +140,14 @@ public class EventController {
 	public void userSearch(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		String eventName = (String) request.getSession().getAttribute("searchedName");
 		Collection<Event> events = eventService.findByNameContaining(eventName);
-		request.getSession().setAttribute("events", events);
+		User u = (User) request.getSession().getAttribute("user");
+		Collection<Event> otherEvents = new ArrayList();
+		for(Event e : events){
+			if(e.getUser().getId()!=u.getId()){
+				otherEvents.add(e);
+			}
+		}
+		request.getSession().setAttribute("events", otherEvents);
 		response.sendRedirect("/searchedEvents");
 	}
 }
