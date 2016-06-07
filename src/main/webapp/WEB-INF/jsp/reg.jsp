@@ -59,17 +59,7 @@
 
 <script type="text/javascript"
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-	<script type="text/javascript">
-		$(function() {
-			$("#submit").click(function() {
-				var password = $("#password").val();
-				var confirmPassword = $("#confirmPassword").val();
-				if (password != confirmPassword) {
-					alert("Passwords do not match!");
-					return false;
-				}
-				return true;
-			});
-		});
-	</script>
+	<script type="text/javascript" src = "/resources/static/js/passCheck.js"></script>
+		
+
 </html>
