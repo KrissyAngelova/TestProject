@@ -7,51 +7,71 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/resources/static/css/createEventCss.css">
+</head>
+<head>
+  <title>Bootstrap Case</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/resources/static/css/navigationBarStyle.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
 
- <form method="post" action="/Logout">
-	<input type="submit" value="Logout" />
-	</form>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav navbar-left">
+<li class="nav navbar-nav navbar-right"><a href = "/Logout" id = "logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      <li><a id = "back">Back</a></li>
+      <li><a href = "/loggedUserPage" id ="myProfile"><span class="glyphicon glyphicon-user"></span> ${user.username}</a></li>
+      
+    </ul>
+  </div>
+</nav>
+</body>
+
+<script type="text/javascript"
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script type="text/javascript" src = "/resources/static/js/navigationBar.js"></script>
+
+<body>
+
         <form method="post" action="/UpdateEvent/${event.id}">
             <center>
-            <table border="1" width="30%" cellpadding="5">
-                <thead>
-                    <tr>
-                        <th colspan="2">Enter Information Here</th>
-                    </tr>
-                </thead>
-                <tbody>
+          <ul class="form-style-1">
                    
-                    <tr>
-                        <td>Event name</td>
-                        <td><input type="text" name="name"  value="${event.name}" required/></td>
-                    </tr>
-                    <tr>
-                        <td>Description</td>
-                        <td><input type="text" name="description" value="${event.description}"" required/></td>
-                    </tr>
-                    <tr>
-                    	<td>Current date</td>
-                    	<td><p><fmt:formatDate pattern="dd-MM-YYYY" value="${event.date}"/></p></td>
-                    </tr>
-                     <tr>
-                        <td>Set new date</td>
-                        <td><input type="date" name="date" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td><input type="submit" value="Submit" /></td>
-                        <td><input type="reset" value="Reset" /></td>
-                    </tr>
-                </tbody>
-            </table>
+   			 <li><label>Event name <span class="required">*</span></label><input type="text" name="name"  value="${event.name}" class="field-divided" />
+</li>
+                    
+    <li>
+        <label>Description <span class="required">*</span></label>
+        <textarea name="description" id="field5" class="field-long field-textarea"> ${event.description} </textarea>
+    </li>
+
+                    <li>
+                    	<label>Current date</label>
+                    	<p><fmt:formatDate pattern="dd-MM-YYYY" value="${event.date}"/></p>
+                    </li>
+                      <li>
+		   		 <label>Set new date</label>
+		         <input type="date" name="date" value="" />
+   </li>
+
+                    <li>
+                        <input type="submit" value="Update" />
+                        <input type="reset" value="Reset" />
+                    </li>
+        		  <p>${updateEventMessage}</p>
+        		  
             </center>
         </form>
-        <p>${updateEventMessage}</p>
-       
-        <form method="put" action="/addGiftPage">
-		<input type="submit" value="Add gift" />
-		</form>
+       <form method="put" action="/addGiftPage"class="form-style-1">
+       <center>
+			<input type="submit" value="Add gift" />
+	   </center>
+       </form>
         <form method="get" action="/loggedUserPage">
 		<input type="submit" value="Back" />
 		</form>

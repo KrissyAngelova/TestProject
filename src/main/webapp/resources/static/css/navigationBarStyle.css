@@ -1,0 +1,54 @@
+@CHARSET "UTF-8";
+
+
+#custom-search-input .dropdown {
+ 	margin-top: 20px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-left: 625px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    }
+ 
+    #custom-search-input .input-group{
+         margin-top: -25px;
+   		 margin-bottom: 0px;
+    	 margin-right: -100px;
+   		 margin-left: 550px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+ 
+    #custom-search-input button {
+        border: 8;
+        background: #5c8a8a;
+        /** belows styles are working good */
+        padding: 7px 7px;
+        margin-top: -1px;
+        position: relative;
+        left: 0px;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+        margin-bottom: 15px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        color:#000000;
+    }
+    
+    #createButton{
+    margin-right: 500px;
+    margin-left: 710px;
+    background-color: #5c8a8a;
+    border: none;
+    color: white;
+    padding: 14px 40px;
+    border-radius: 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    width: 25%;
+    }
+    

@@ -1,14 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<link rel="stylesheet" href="/resources/static/css/createEventCss.css">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Create event</title>
-</head>
-
+<title>Insert title here</title>
 <head>
   <title>Bootstrap Case</title>
   <meta charset="utf-8">
@@ -26,7 +22,27 @@
 <li class="nav navbar-nav navbar-right"><a href = "/Logout" id = "logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       <li><a id = "back">Back</a></li>
       <li><a href = "/loggedUserPage" id ="myProfile"><span class="glyphicon glyphicon-user"></span> ${user.username}</a></li>
-      
+      <form action="/Search" method="post" id="custom-search-input">
+           <li class="dropdown">
+        	<select name = "choice" id = "choice">
+   			<option value="user">User</option>
+   			<option value="event">Event</option>
+ 			</select>
+    		</li>
+   		    <li>
+			  <div class="row"> 		      
+			  <div class="col-lg-6">
+			    <div class="input-group">
+			      	<input type="text" class="form-control" name = "name" placeholder="Search for...">
+			   		 <span class="input-group-btn">
+			        <button class="btn btn-default" type="submit">Go!</button>
+			    	</span>
+			    </div>
+			    </div>
+			    </div>
+
+             </li>
+             </form>
     </ul>
   </div>
 </nav>
@@ -35,31 +51,5 @@
 <script type="text/javascript"
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 		<script type="text/javascript" src = "/resources/static/js/navigationBar.js"></script>
- <body>
-        
-   <form method="post" action="/CreateEvent">>
-<ul class="form-style-1">
-    <li><label>Event name <span class="required">*</span></label><input type="text" name="name" class="field-divided" />
-    
-    <li>
-        <label>Description <span class="required">*</span></label>
-        <textarea name="description" id="field5" class="field-long field-textarea"></textarea>
-    </li>
-    <li>
-   		 <label>Date<span class="required">*</span></label>
-         <input type="date" name="date" value="" required/>
-   </li>
-    
-    <li>
-        <input type="submit" value="Create" />&nbsp;<input type = "reset" value = "Reset"/>
-        <p>${createEventMessage}</p>
-    </li>
-</ul>
-</form>
- 
-        <c:set var="createEventMessage" value="" scope="session"  />
-         <form method="get" action="/loggedUserPage">
-		<input type="submit" value="Back" />
-		</form>
-    </body>
+	
 </html>

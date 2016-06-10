@@ -6,64 +6,93 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<link rel="stylesheet" href="/resources/static/css/mainStyleCss.css">
+<link rel="stylesheet" href="/resources/static/css/eventTableStyle.css">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Event Info Page</title>
 </head>
+<jsp:include page="navigationBar.jsp" />
+<style>table {
+  color: #333;
+  font-family: sans-serif;
+  font-size: .9em;
+  font-weight: 300;
+  text-align: left;
+  line-height: 40px;
+  border-spacing: 0;
+  border: 2px solid #5c8a8a;
+  width: 50%;
+  margin: 50px auto;
+}
+</style>
 <body>
-<form method="post" action="/Logout">
-	<input type="submit" value="Logout" />
-	</form>
+
  	<h2>${event.name}</h2>
  	<p></p>
  	<p>Date: <fmt:formatDate pattern="yyyy-MM-dd" value="${event.date}"/></p>
  	<p>Description: ${event.description}</p>
- 	
  	<c:if test = "${empty wantedGifts}">
-			<p>No Gifts to show</p>
+			<p>No Gifts  to show</p>
 	</c:if>
 	
 	<c:if test = "${not empty wantedGifts}">
-	<table  border="1" width="30%" cellpadding="3">
-	<tr>	
-		<td colspan = "6">GIFTS</td>
-	</tr>
-	<tr>
-		<td>N</td>
+	<table>
+	<thead>
+    <tr>
+      <th colspan="6">GIFTS</th>
+    </tr>
+   <tr>
+      	<td>N</td>
 		<td>Name</td>
 		<td>Desc</td>
 		<td>Taken</td>
-	</tr>
+		<td>Buyer</td>
+
+    </tr>
+  </thead>
 		<c:forEach items="${wantedGifts}" var="gift" varStatus="myIndex">
 			<tr>
 				<td> ${myIndex.index+1}</td>
-	    		<td> ${gift.name}</td>
+	    		<td>${gift.name}</td>
 	    		<td> ${gift.description}</td>
 	    		<c:if test = "${gift.isTaken()}">
-	    		<td>${gift.buyer.getUsername()}</td>
+	    		<td>Yes</td>
+	    		<td><a id = "user" href ="/viewProfile/${gift.buyer.getId()}">${gift.buyer.getUsername()}</a></td>
 	    		<c:if test = "${gift.buyer.getUsername() == sessionScope.username}">
-	    		<td><form method="post" action="/removeGift/${gift.id}">
-						<input type="submit" value="remove" />
+	    		<td>
+	    				<form method="post" action="/removeGift/${gift.id}">
+						<button type = "submit"> <span class = "glyphicon glyphicon-remove foo"></span></button>
 						</form>
-						</td>
-				</c:if>
+ 				
+				</td>
+	    		</c:if>
 	    		</c:if>
 	    		<c:if test = "${not gift.isTaken()}">
+	    		<td> No </td>
+	    		<td> - </td>
 	    		<td>
-	    				<form method="post" action="/takeGift/${gift.id}">
-						<input type="submit" value="take" />
+	    		<form method="post" action="/takeGift/${gift.id}">
+						<button type = "submit"> <span class = "glyphicon glyphicon-ok foo"></span></button>
 						</form>
-				</td>
-				</c:if>	
+	    		</td>
+	    		</c:if>
+				
 	    	</tr>
 		</c:forEach>
 	</table>
+	<form method="put" action="/addGiftPage"class="form-style-1">
+       <center>
+			<input type="submit" value="Add gift" />
+	   </center>
+       </form>
 	</c:if>
- 	<form method="get" action="/profile">
-	<input type="submit" value="Back" />
-	</form>
 	<p>${takeErrorMessage}</p>
 	<c:set var="takeErrorMessage" value="" scope="session"  />
+
+		<form method="get" action="/loggedUserPage">
+	<input type="submit" value="Back" />
+	</form>
 	
 </body>
 </html>

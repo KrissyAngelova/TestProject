@@ -8,66 +8,50 @@
 <meta http-equiv="Content-Type" content="text/html; UTF-8">
 <title>loggedUserPage</title>
 <link rel="stylesheet" href="/resources/static/css/mainStyleCss.css">
+<link rel="stylesheet" href="/resources/static/css/eventTableStyle.css">
 </head>
-<body class="align">
-    <form method="post" action="/Logout">
-	<input type="submit" value="Logout" />
+<jsp:include page="navigationBar.jsp" />
+<body>
+   <form method="get" action="/createEvent">
+	<input id = "createButton" type="submit" value="New Event" />
 	</form>
-	<p>Welcome, ${username}</p>
-
-	<form method="post" action="/Search">
-	<h2> Search </h2>
-	<input type="text" name="name" value="" required/>
-	<select name = "choice">
-  	<option value="user">User</option>
-  	<option value="event">Event</option>
-	</select>
-	<input type="submit" value="Search" />
-	</form>
-	
-	</p>
-	
-	<c:if test = "${empty myEvents}">
+	</br>
+	</br>
+<c:if test = "${empty myEvents}">
 			<p>No Events to show</p>
 	</c:if>
 	
 	<c:if test = "${not empty myEvents}">
-	<table  border="1" width="30%" cellpadding="3">
-	<tr>	
-		<td colspan = "6">MY EVENTS</td>
-	</tr>
-	<tr>
-		<td>N</td>
-		<td>Name</td>
-		<td>Desc</td>
-	</tr>
+	<table>
+	<thead>
+    <tr>
+      <th colspan="4">MY EVENTS</th>
+    </tr>
+   <tr>
+      <th>#</th>
+      <th colspan="3">Event's name</th>
+    </tr>
+  </thead>
 		<c:forEach items="${myEvents}" var="event" varStatus="myIndex">
 			<tr>
 				<td> ${myIndex.index+1}</td>
-	    		<td> ${event.name}</td>
-	    		<td> ${event.description}</td>
-	    		<td>
-	    				<form method="get" action="/openEvent/${event.id}">
-						<input type="submit" value="Info" />
-						</form>
-				</td>
+	    		<td><a id = "event" href ="/openEvent/${event.id}">${event.name}</a></td>
+	    		
 				<td>
+				
 	    				<form method="GET" action="/openUpdateEventPage/${event.id}">
-						<input type="submit" value="update" />
+	    				<button type = "submit"> <span class="glyphicon glyphicon-pencil  foo"></span></button>	
 						</form>
 				</td>
 				<td>
 	    				<form method="post" action="/deleteEvent/${event.id}">
-						<input type="submit" value="delete" />
+						<button type = "submit"> <span class = "glyphicon glyphicon-trash foo"></span></button>
 						</form>
+ 				
 				</td>
 	    	</tr>
 		</c:forEach>
 	</table>
 	</c:if>
-	<p></p>
-	<form method="get" action="/createEvent">
-	<input type="submit" value="New Event" />
-	</form>
 </body>
 </html>
