@@ -24,7 +24,7 @@
   <div class="container-fluid">
     <ul class="nav navbar-nav navbar-left">
 <li class="nav navbar-nav navbar-right"><a href = "/Logout" id = "logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-      <li><a id = "back">Back</a></li>
+
       <li><a href = "/loggedUserPage" id ="myProfile"><span class="glyphicon glyphicon-user"></span> ${user.username}</a></li>
       
     </ul>
@@ -58,8 +58,10 @@
 </form>
  
         <c:set var="createEventMessage" value="" scope="session"  />
-         <form method="get" action="/loggedUserPage">
+         <form method="get" action="/loggedUserPage" class="form-style-1">
+         <center>
 		<input type="submit" value="Back" />
+		</center>
 		</form>
     </body>
 </html>

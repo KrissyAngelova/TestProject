@@ -72,8 +72,11 @@
 			<input type="submit" value="Add gift" />
 	   </center>
        </form>
-        <form method="get" action="/loggedUserPage">
+       
+		 <form method="get" action="/loggedUserPage" class = "form-style-1">
+         <center>
 		<input type="submit" value="Back" />
+		</center>
 		</form>
 		 <c:set var="updateEventMessage" value="" scope="session"></c:set>
 </body>

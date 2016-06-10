@@ -83,8 +83,10 @@
 	</table>
 	
 	</c:if>
-	<form method="get" action="/searchedEvents">
+	<form method="get" action="/viewProfile/${userProfile.id}" class = "form-style-1">
+	<center>
 	<input type="submit" value="Back" />
+	</center>
 	</form>
 	<p>${takeErrorMessage}</p>
 	<c:set var="takeErrorMessage" value="" scope="session"  />

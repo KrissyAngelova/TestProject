@@ -35,8 +35,10 @@
 		</c:forEach>
 	</table>
 	</c:if>
-		<form method="get" action="/searchedUsers">
+		<form method="get" action="/searchedUsers" class="form-style-1">
+		<center>
 		<input type="submit" value="Back" />
+		</center>
 		</form>
 	
 </body>

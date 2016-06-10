@@ -59,8 +59,10 @@
         </form>
        
         <c:set var="updateGiftMessage" value="" scope="session"  />
-         <form method="get" action="/openEvent/${event.id}">
+        <form method="get" action="/openEvent/${event.id}" class = "form-style-1">
+         <center>
 		<input type="submit" value="Back" />
+		</center>
 		</form>
 
 </body>

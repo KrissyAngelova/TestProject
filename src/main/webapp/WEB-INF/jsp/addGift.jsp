@@ -59,12 +59,14 @@
         
         <c:set var="addGiftMessage" value="" scope="session"  />
         <c:set var = "eventId" value = "${sessionScope.event.id}" scope = "session"/>
-         <form method="get" action="/openEvent/${event.id}">
+         <form method="get" action="/openEvent/${event.id}" class = "form-style-1">
+         <center>
 		<input type="submit" value="Back" />
+		</center>
 		</form>
 </body>
 
 <script type="text/javascript"
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-		<script type="text/javascript"  src = "/resources/static/js/backToEvent.js"></script>
+		
 </html>

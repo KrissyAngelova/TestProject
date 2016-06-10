@@ -20,7 +20,6 @@
   <div class="container-fluid">
     <ul class="nav navbar-nav navbar-left">
 <li class="nav navbar-nav navbar-right"><a href = "/Logout" id = "logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-      <li><a id = "back">Back</a></li>
       <li><a href = "/loggedUserPage" id ="myProfile"><span class="glyphicon glyphicon-user"></span> ${user.username}</a></li>
       <form action="/Search" method="post" id="custom-search-input">
            <li class="dropdown">

@@ -89,9 +89,11 @@
 	<c:set var="deleteErrorMessage" value="" scope="session"  />
 	<p>${updateErrorMessage}</p>
 	<c:set var="deleteErrorMessage" value="" scope="session"  />
-		<form method="get" action="/loggedUserPage">
-	<input type="submit" value="Back" />
-	</form>
+		<form method="get" action="/loggedUserPage" class = "form-style-1">
+         <center>
+		<input type="submit" value="Back" />
+		</center>
+		</form>
 	
 </body>
 </html>
