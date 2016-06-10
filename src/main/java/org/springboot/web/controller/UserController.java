@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,8 +64,8 @@ public class UserController {
 		String username = request.getParameter("uname");
 		String password = request.getParameter("pass");
 		boolean exists = false;
-		exists = userService.isUserExists(username, password);
-		
+		User user  = userService.findByUsername(username);
+		exists = BCrypt.checkpw(password, user.getPassword());
 		if(exists){
 			User u = userService.findByUsername(username);
 			request.getSession().setAttribute("user", u);
@@ -85,7 +86,8 @@ public class UserController {
 	public void Registration(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws IOException{
 		String username = request.getParameter("uname");
 		String password = request.getParameter("pass");
-		boolean exists = userService.isUserExists(username, password);
+		String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
+		boolean exists = userService.isUserExists(username, hashed);
 		
 		
 		if(exists){
@@ -94,7 +96,7 @@ public class UserController {
 		}
 		else{
 			if(!userService.isUsernameTaken(username)){
-				User u = new User(username, password);
+				User u = new User(username, hashed);
 				userService.create(u);
 				request.getSession().setAttribute("regMessage", "Registration created successfully");
 				

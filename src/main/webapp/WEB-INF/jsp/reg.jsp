@@ -33,7 +33,7 @@
 
 		<div class="form__field">
           <label for="login__password"><span class="hidden">Confirm password</span></label>
-          <input id="confrimPassword" type="password" name="confirmPass" class="form__input" placeholder="Confirm password" required autocomplete="off" >
+          <input id="confirmPassword" type="password" name="confirmPass" class="form__input" placeholder="Confirm password" required autocomplete="off" >
         </div>
         
         <div class="form__field">
