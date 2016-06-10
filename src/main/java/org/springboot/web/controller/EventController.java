@@ -57,9 +57,9 @@ public class EventController {
 			value = "/openEvent/{id}",
 			method = RequestMethod.GET
 			)
-	public void openEvent(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response) throws IOException{
-		Long eId = Long.valueOf(id).longValue();
-		Event e = eventService.findOne(eId);
+	public void openEvent(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws IOException{
+	
+		Event e = eventService.findOne(id);
 		request.getSession().setAttribute("event", e);
 		request.getSession().setAttribute("wantedGifts", e.getWantedGifts());
 		response.sendRedirect("/eventInfoPage");
